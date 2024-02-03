@@ -10,7 +10,6 @@
 </head>
 <body>
     <header>
-        <h1> Welcome to JM College </h1>
         <nav>
             <ul>
                 <li><a href="/home/">Home</a></li>
@@ -22,14 +21,22 @@
 
     <main>
         <section>
-            <p>"Education is the key to unlock
-                 the golden door of freedom."</p>
+            <ul>
+                {% for college in serialized_data %}
+                    <li>
+                        <h1>{{ college.name }}</h1>
+                        <p>Location: {{ college.location }}</p>
+                        <p>Established: {{ college.established }}</p>
+                        <p>Description: {{ college.description }}</p>
+                        <p>Website: <a href="{{ college.website }}">{{ college.website }}</a></p>
+                        <p>Contact Email: {{ college.contact_email }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
         </section>
     </main>
 
     <footer>
-        <h2>Founded by: Dr. JAGNATHAN MORE</h2>
-        <p>Established: 1965</p>
         <p>Contact Information: jm1968@email.com</p>
     </footer>
 
