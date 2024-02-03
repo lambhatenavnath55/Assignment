@@ -1,8 +1,9 @@
-from django.shortcuts import render
-from .models import College
-from .serializers import CollegeSerializer
+from django.shortcuts import render, redirect
+from .models import College, Professor, Department
+from .serializers import CollegeSerializer, ProfessorSerializer
 import datetime
 import random
+from .forms import ProfessorForm
 
 # Create your views here.
 from django.shortcuts import render
@@ -39,3 +40,19 @@ def contact(request):
     template_name = 'college_app/contact.html'
     college_object = College.objects.first()
     return render(request, template_name, {'contact':college_object.contact_email})
+
+def create_professor(request):
+    if request.method == 'POST':
+        form = ProfessorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('professor_info')
+    else:
+        form = ProfessorForm()
+    return render(request, 'college_app/create_professor.html', {'form': form})
+
+def professor_info(request):
+    template_name = 'college_app/professor_info.html'
+    professors = Professor.objects.all()
+    serializer =  ProfessorSerializer(professors, many=True)
+    return render(request, template_name, {'serialized_data': serializer.data})

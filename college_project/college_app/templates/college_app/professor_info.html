@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professor Details</title>
+    <link rel="stylesheet" href="{% static 'college_app/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Professor Details</h1>
+    </header>
+
+    <main>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="/">Dashboard</a></li>
+                    <li><a href="/home/">Home</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                    <li><a href="/create_professor/">Add Professor Imformation</a></li>
+                </ul>
+            </nav>
+        </header>
+        <section>
+            <ul>
+                {% for professor in serialized_data %}
+                    <li>
+                        <h1 style="display: inline;">{{ professor.first_name }}</h1>
+                        <h1 style="display: inline;">{{ professor.last_name }}</h1>
+                        <p>Department: {{ professor.department }}</p>
+                        <p>Email: {{ professor.email }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+
+
+    <script src="{% static 'college_app/js/script.js' %}"></script>
+</body>
+</html>
